@@ -4,7 +4,8 @@ class JokeController < ApplicationController
   def fetch
     #get contact_id from webhook
     Rails.logger.debug params.inspect
-      @contact_id = params['endUserId']
+    @data = params[:data]
+    @contact_id = @data['endUserId']
 
       #get the joke
       fetched_joke = httparty.get("https://icanhazdadjoke.com/", {
@@ -15,6 +16,7 @@ class JokeController < ApplicationController
     send_joke_body = {"body" => {"attributes" => {"jokebot_joke" => "#{fetched_joke['joke']}"}}}
 
       #send the joke to the conversation
-    httparty.patch("https://driftapi.com/contacts/#{@contact_id}", headers: send_joke_headers, body: send_joke_body)
+    send_joke_response = httparty.patch("https://driftapi.com/contacts/#{@contact_id}", headers: send_joke_headers, body: send_joke_body)
+    Rails.logger.debug "This was the response: #{send_joke_response}"
   end
 end
