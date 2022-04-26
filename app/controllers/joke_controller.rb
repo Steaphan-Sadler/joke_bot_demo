@@ -4,7 +4,7 @@ class JokeController < ApplicationController
   def fetch
     #get contact_id from webhook
     Rails.logger.debug params.inspect
-    message_id = params['data']['id']
+    message_id = params['data']['conversationId']
     
 
       #get the joke
