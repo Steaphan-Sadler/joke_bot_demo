@@ -4,7 +4,7 @@ class JokeController < ApplicationController
   def fetch
     #check webhook post for yes-ness
     Rails.logger.debug params.inspect
-    if params[:body] == "Yes"
+    if params[:data]['body'] == "Yes"
       @convo_id = params[:orgId]
 
       #get the joke
@@ -14,7 +14,7 @@ class JokeController < ApplicationController
 
       #send the joke to the conversation
       httparty.post("https://driftapi.com/conversations/#{@convo_id}/messages", {
-        headers: { "Authorization" => "Bearer: #{ENV["JOKE_BOT_TOKEN"]}" },
+        headers: { "Authorization" => "Bearer #{ENV["JOKE_BOT_TOKEN"]}" },
         body: { "type" => "chat",
                 "body": fetched_joke["joke"] },
       })
