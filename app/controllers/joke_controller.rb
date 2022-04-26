@@ -3,7 +3,8 @@ class JokeController < ApplicationController
 
   def fetch
     #check webhook post for yes-ness
-    if params[:data][:body] == "Yes"
+    Rails.logger.debug params.inspect
+    if params[:body] == "Yes"
       @convo_id = params[:orgId]
 
       #get the joke
