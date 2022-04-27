@@ -16,7 +16,6 @@ class JokeController < ApplicationController
     send_joke_body = {"type" => "chat", "body" => fetched_joke['joke']}
 
       #send the joke to the conversation
-    send_joke_response = HTTParty.post("https://driftapi.com/conversations/#{@message_id}/messages", headers: send_joke_headers, body: send_joke_body.to_json)
-    Rails.logger.debug "This was the response: #{send_joke_response}"
+      Rails.logger.debug HTTParty.post("https://driftapi.com/conversations/#{@message_id}/messages", headers: send_joke_headers, body: send_joke_body.to_json)
   end
 end
