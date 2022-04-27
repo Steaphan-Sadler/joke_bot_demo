@@ -77,9 +77,6 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  #Use Integration Generated Token for making API calls
-  JOKE_BOT_TOKEN = ENV['JOKE_BOT_TOKEN']
-
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 

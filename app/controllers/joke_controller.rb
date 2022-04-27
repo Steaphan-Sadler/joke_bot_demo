@@ -12,7 +12,7 @@ class JokeController < ApplicationController
         headers: { "Accept" => "application/json" }
       })
 
-    send_joke_headers = {"Authorization" => "Bearer #{ENV['JOKE_BOT_TOKEN']}", "content-type" => "application/json"}
+    send_joke_headers = {"Authorization" => "Bearer #{ENV.fetch("JOKE_BOT_TOKEN")}", "content-type" => "application/json"}
     send_joke_body = {"type" => "chat", "body" => fetched_joke['joke']}
 
       #send the joke to the conversation
