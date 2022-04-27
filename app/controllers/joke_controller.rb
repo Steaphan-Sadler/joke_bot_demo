@@ -4,7 +4,7 @@ class JokeController < ApplicationController
   def fetch
     #get contact_id from webhook
     Rails.logger.debug params.inspect
-    message_id = params[:data]['conversationId']
+    @message_id = params[:conversationId]
     
 
       #get the joke
@@ -16,7 +16,7 @@ class JokeController < ApplicationController
     send_joke_body = {"type" => "chat", "body" => fetched_joke['joke']}
 
       #send the joke to the conversation
-    send_joke_response = HTTParty.post("https://driftapi.com/conversations/#{message_id}/messages", headers: send_joke_headers, body: send_joke_body.to_json)
+    send_joke_response = HTTParty.post("https://driftapi.com/conversations/#{@message_id}/messages", headers: send_joke_headers, body: send_joke_body.to_json)
     Rails.logger.debug "This was the response: #{send_joke_response}"
   end
 end
