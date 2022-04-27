@@ -1,6 +1,6 @@
 class JokeController < ApplicationController
   require "httparty"
-
+  skip_before_action :verify_authenticity_token
   def fetch
     #get contact_id from webhook
     Rails.logger.debug params.inspect
