@@ -3,6 +3,6 @@ Rails.application.routes.draw do
 
   get 'robot/index', to: 'robot#index'
   
-  post 'joke/fetch', to:  'joke#fetch'
+  post 'joke/fetch',  to:  'joke#fetch'
   
 end
